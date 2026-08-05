@@ -13,7 +13,6 @@ export default function Navbar({ onOpenBooking, wishlistCount, onOpenWishlist })
     { id: 'about', label: 'About' },
     { id: 'services', label: 'Layanan' },
     { id: 'packages', label: 'Paket' },
-    { id: 'estimator', label: 'Kalkulator' },
     { id: 'gallery', label: 'Galeri' },
     { id: 'process', label: 'Alur' },
     { id: 'contact', label: 'Kontak' },
