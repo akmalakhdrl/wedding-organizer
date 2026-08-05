@@ -41,7 +41,7 @@ export default function BackToTop() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-24 right-6 z-40 w-12 h-12 rounded-full bg-luxury-dark/90 text-luxury-gold border border-luxury-gold/40 shadow-luxury backdrop-blur-md flex items-center justify-center group"
+          className="fixed bottom-6 left-6 z-40 w-12 h-12 rounded-full bg-luxury-dark/90 text-luxury-gold border border-luxury-gold/40 shadow-luxury backdrop-blur-md flex items-center justify-center group"
           aria-label="Back to Top"
         >
           {/* Circular Progress Ring */}

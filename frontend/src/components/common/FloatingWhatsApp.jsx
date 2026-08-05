@@ -55,7 +55,7 @@ export default function FloatingWhatsApp() {
                 <p className="font-semibold text-luxury-gold flex items-center gap-1">
                   <Sparkles className="w-3 h-3" /> Halo Pasangan Bahagia!
                 </p>
-                <p>Selamat datang di Aura Wedding Organizer. Ada yang bisa kami bantu untuk perencanaan pernikahan impian Anda?</p>
+                <p>Selamat datang di Kresna Management. Ada yang bisa kami bantu untuk perencanaan pernikahan impian Anda?</p>
                 <span className="text-[9px] text-white/40 block text-right">Sekarang</span>
               </div>
             </div>
