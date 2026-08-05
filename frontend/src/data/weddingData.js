@@ -41,7 +41,7 @@ export const heroSlides = [
     subtitle: "Dipercaya oleh ratusan pasangan selebritas, eksekutif, & keluarga terpandang di seluruh Nusantara.",
     image: "https://images.unsplash.com/photo-1544078751-58fee2d8a03b?q=80&w=2000&auto=format&fit=crop",
     ctaPrimary: "Cek Ketersediaan Tanggal",
-    ctaSecondary: "Kalkulator Biaya"
+    ctaSecondary: "Galeri Portofolio"
   }
 ];
 

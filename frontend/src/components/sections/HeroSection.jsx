@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Calendar, Calculator, Heart } from 'lucide-react';
+import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Calendar, Heart } from 'lucide-react';
 import { heroSlides } from '../../data/weddingData';
 
 export default function HeroSection({ onOpenBooking, scrollToSection }) {
@@ -108,22 +108,6 @@ export default function HeroSection({ onOpenBooking, scrollToSection }) {
             </button>
           </motion.div>
 
-          {/* Quick Tools Row */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.9 }}
-            className="pt-8 flex flex-wrap items-center gap-4 text-xs text-luxury-cream/70"
-          >
-            <span className="text-luxury-gold font-medium">Fitur Interaktif:</span>
-            <button
-              onClick={() => scrollToSection('estimator')}
-              className="flex items-center gap-1.5 hover:text-luxury-gold transition-colors underline underline-offset-4"
-            >
-              <Calculator className="w-3.5 h-3.5 text-luxury-gold" />
-              <span>Hitung Biaya Pernikahan</span>
-            </button>
-          </motion.div>
         </div>
       </div>
 
