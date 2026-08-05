@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: #FAF7F2;
+    color: #1A1817;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F4EFEA;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C5A059;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(255, 253, 249, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.glass-panel-dark {
+  background: rgba(26, 24, 23, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(239, 230, 221, 0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(212, 175, 55, 0.12);
+}
+
+/* Text Shimmer Effect */
+.gold-text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #997A37 0%,
+    #D4AF37 25%,
+    #FFFDF9 50%,
+    #D4AF37 75%,
+    #997A37 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 6s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Custom Swiper Pagination */
+.swiper-pagination-bullet {
+  background: #D4AF37 !important;
+  opacity: 0.4 !important;
+  width: 10px !important;
+  height: 10px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+  width: 28px !important;
+  border-radius: 6px !important;
+  background: #D4AF37 !important;
+}
