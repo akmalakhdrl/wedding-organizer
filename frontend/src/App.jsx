@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, X, Trash2, ArrowRight, Sparkles } from 'lucide-react';
 
@@ -27,116 +27,6 @@ import ContactSection from './components/sections/ContactSection';
 export default function App() {
   const [isPreloading, setIsPreloading] = useState(true);
   
-  // ─── Background Music State (App-level) ────────────────────────────────────
-  const audioRef      = useRef(null);
-  const [musicPlaying, setMusicPlaying] = useState(false);
-  const [musicMuted,   setMusicMuted]   = useState(false);
-  const [musicEnabled, setMusicEnabled] = useState(true); // user preference
-  const musicEnabledRef = useRef(true);
-
-  useEffect(() => { musicEnabledRef.current = musicEnabled; }, [musicEnabled]);
-
-  // Start muted autoplay on mount (browsers always permit muted autoplay)
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    audio.volume = 0.5;
-    audio.muted = true;
-    audio.play()
-      .then(() => {
-        setMusicPlaying(true);
-      })
-      .catch(() => {});
-  }, []);
-
-  // When preloader finishes, unmute audio and ensure play
-  const handlePreloaderFinish = useCallback(() => {
-    setIsPreloading(false);
-
-    const audio = audioRef.current;
-    if (!audio || !musicEnabledRef.current) return;
-
-    audio.muted = false;
-    audio.volume = 0.5;
-    audio.play()
-      .then(() => setMusicPlaying(true))
-      .catch((err) => {
-        console.log('Unmute on preloader finish:', err);
-      });
-  }, []);
-
-  // User gesture listener: unmute & play on any click/tap/pointerdown
-  useEffect(() => {
-    const handleGesture = () => {
-      const audio = audioRef.current;
-      if (!audio || !musicEnabledRef.current) return;
-      audio.muted = false;
-      audio.volume = 0.5;
-      if (audio.paused) {
-        audio.play().then(() => setMusicPlaying(true)).catch(() => {});
-      } else {
-        setMusicPlaying(true);
-      }
-    };
-
-    window.addEventListener('click', handleGesture);
-    window.addEventListener('touchstart', handleGesture, { passive: true });
-    window.addEventListener('pointerdown', handleGesture, { passive: true });
-    window.addEventListener('keydown', handleGesture);
-
-    return () => {
-      window.removeEventListener('click', handleGesture);
-      window.removeEventListener('touchstart', handleGesture);
-      window.removeEventListener('pointerdown', handleGesture);
-      window.removeEventListener('keydown', handleGesture);
-    };
-  }, []);
-
-  // Observe Home section visibility — pause/resume
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      const audio = audioRef.current;
-      if (!audio || !musicEnabledRef.current) return;
-
-      if (entry.isIntersecting) {
-        audio.play().then(() => setMusicPlaying(true)).catch(() => {});
-      } else {
-        audio.pause();
-        setMusicPlaying(false);
-      }
-    }, { threshold: 0.15 });
-
-    const el = document.getElementById('home');
-    if (el) observer.observe(el);
-    return () => { if (el) observer.unobserve(el); };
-  }, []);
-
-  const handleToggleMusic = useCallback(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (musicEnabled) {
-      // Turn OFF
-      audio.pause();
-      setMusicPlaying(false);
-      setMusicEnabled(false);
-    } else {
-      // Turn ON — direct user click, so browser allows play()
-      setMusicEnabled(true);
-      musicEnabledRef.current = true;
-      audio.muted = false;
-      audio.volume = 0.5;
-      audio.play().then(() => setMusicPlaying(true)).catch(() => {});
-    }
-  }, [musicEnabled]);
-
-  const handleToggleMute = useCallback(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    audio.muted = !musicMuted;
-    setMusicMuted(prev => !prev);
-  }, [musicMuted]);
-
   // Booking Modal State
   const [bookingOpen, setBookingOpen] = useState(false);
   const [selectedBookingItem, setSelectedBookingItem] = useState(null);
@@ -237,16 +127,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-luxury-cream text-luxury-dark selection:bg-luxury-gold selection:text-white relative">
-      {/* Global Background Audio */}
-      <audio
-        ref={audioRef}
-        loop
-        preload="auto"
-        src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-piano-112191.mp3"
-      />
-
       {/* 1. Luxury Preloader */}
-      <Preloader onFinish={handlePreloaderFinish} />
+      <Preloader onFinish={() => setIsPreloading(false)} />
 
       {/* 2. Glassmorphism Navbar */}
       <Navbar
@@ -261,11 +143,6 @@ export default function App() {
         <HeroSection
           onOpenBooking={() => handleOpenBooking()}
           scrollToSection={scrollToSection}
-          musicPlaying={musicPlaying}
-          musicMuted={musicMuted}
-          musicEnabled={musicEnabled}
-          onToggleMusic={handleToggleMusic}
-          onToggleMute={handleToggleMute}
         />
 
         {/* Section 2: About */}
