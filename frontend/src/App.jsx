@@ -22,7 +22,7 @@ import GallerySection from './components/sections/GallerySection';
 import VideoHighlightSection from './components/sections/VideoHighlightSection';
 import TestimonialsSection from './components/sections/TestimonialsSection';
 import WeddingProcessSection from './components/sections/WeddingProcessSection';
-import FaqSection from './components/sections/FaqSection';
+
 import ContactSection from './components/sections/ContactSection';
 
 export default function App() {
@@ -185,8 +185,6 @@ export default function App() {
         {/* Section 11: Wedding Process Timeline */}
         <WeddingProcessSection />
 
-        {/* Section 12: FAQ Accordion */}
-        <FaqSection />
 
         {/* Section 13: Contact & Booking Form */}
         <ContactSection />

@@ -100,11 +100,6 @@ export default function Footer({ onOpenBooking }) {
                   Galeri Portofolio
                 </button>
               </li>
-              <li>
-                <button onClick={() => scrollToSection('faq')} className="hover:text-luxury-gold transition-colors">
-                  Pertanyaan Umum (FAQ)
-                </button>
-              </li>
             </ul>
           </div>
 

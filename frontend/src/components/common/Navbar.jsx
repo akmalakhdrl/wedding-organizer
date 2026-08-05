@@ -16,7 +16,6 @@ export default function Navbar({ onOpenBooking, wishlistCount, onOpenWishlist })
     { id: 'estimator', label: 'Kalkulator' },
     { id: 'gallery', label: 'Galeri' },
     { id: 'process', label: 'Alur' },
-    { id: 'faq', label: 'FAQ' },
     { id: 'contact', label: 'Kontak' },
   ];
 
