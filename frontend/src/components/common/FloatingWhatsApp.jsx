@@ -38,7 +38,7 @@ export default function FloatingWhatsApp() {
                 </div>
                 <div>
                   <h4 className="font-heading font-semibold text-sm text-white">Kresna Management</h4>
-                  <p className="text-[11px] text-white/80">Online | Respon &lt; 5 Menit</p>
+                  <p className="text-[11px] text-white/80">Online</p>
                 </div>
               </div>
               <button
