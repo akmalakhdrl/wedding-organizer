@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, ChevronLeft, ChevronRight, Calendar, Heart } from 'lucide-react';
+import { Sparkles, ChevronLeft, ChevronRight, Volume2, VolumeX, Music } from 'lucide-react';
 import { heroSlides } from '../../data/weddingData';
 
 export default function HeroSection({ onOpenBooking, scrollToSection }) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const audioRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -13,10 +16,87 @@ export default function HeroSection({ onOpenBooking, scrollToSection }) {
     return () => clearInterval(timer);
   }, []);
 
+  // Play audio only when Home section is visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (audioRef.current && isPlaying) {
+            audioRef.current.play().catch(() => {});
+          }
+        } else {
+          if (audioRef.current) {
+            audioRef.current.pause();
+          }
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    const homeElement = document.getElementById('home');
+    if (homeElement) observer.observe(homeElement);
+
+    return () => {
+      if (homeElement) observer.unobserve(homeElement);
+    };
+  }, [isPlaying]);
+
+  const toggleMusic = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch((err) => {
+        console.log('Audio autoplay prevented or error:', err);
+      });
+    }
+  };
+
+  const toggleMute = () => {
+    if (!audioRef.current) return;
+    audioRef.current.muted = !isMuted;
+    setIsMuted(!isMuted);
+  };
+
   const slide = heroSlides[currentSlide];
 
   return (
     <section id="home" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-luxury-dark text-white select-none">
+      {/* Background Audio Element - Romantic instrumental */}
+      <audio
+        ref={audioRef}
+        loop
+        preload="auto"
+        src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-piano-112191.mp3"
+      />
+
+      {/* Music Control Widget - Floating on Home Section */}
+      <div className="absolute top-28 right-6 z-30 flex items-center gap-2 bg-luxury-dark/70 backdrop-blur-md px-3.5 py-2 rounded-full border border-luxury-gold/30 shadow-gold-glow">
+        <button
+          onClick={toggleMusic}
+          className="flex items-center gap-2 text-xs text-luxury-cream hover:text-luxury-gold transition-colors focus:outline-none"
+          title={isPlaying ? "Jeda Musik" : "Putar Musik Backsound"}
+        >
+          <Music className={`w-4 h-4 text-luxury-gold ${isPlaying ? 'animate-spin' : ''}`} style={{ animationDuration: '4s' }} />
+          <span className="font-medium hidden sm:inline text-[11px] uppercase tracking-wider">
+            {isPlaying ? 'Musik Aktif' : 'Putar Musik'}
+          </span>
+        </button>
+
+        {isPlaying && (
+          <button
+            onClick={toggleMute}
+            className="p-1 text-luxury-gold hover:text-white transition-colors focus:outline-none border-l border-luxury-gold/20 pl-2"
+            title={isMuted ? "Unmute" : "Mute"}
+          >
+            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+          </button>
+        )}
+      </div>
+
       {/* Background Slideshow */}
       <AnimatePresence mode="wait">
         <motion.div
