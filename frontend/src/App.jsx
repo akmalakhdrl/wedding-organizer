@@ -50,7 +50,7 @@ export default function App() {
       });
   }, []);
 
-  // Unlock audio autoplay on any first user gesture anywhere
+  // Unlock audio autoplay on any user gesture anywhere (pointerdown, mousemove, scroll, touchstart)
   useEffect(() => {
     const handleGesture = () => {
       const audio = audioRef.current;
@@ -62,13 +62,17 @@ export default function App() {
     };
 
     window.addEventListener('click', handleGesture);
+    window.addEventListener('pointerdown', handleGesture);
     window.addEventListener('touchstart', handleGesture, { passive: true });
     window.addEventListener('scroll', handleGesture, { passive: true });
+    window.addEventListener('mousemove', handleGesture, { passive: true });
 
     return () => {
       window.removeEventListener('click', handleGesture);
+      window.removeEventListener('pointerdown', handleGesture);
       window.removeEventListener('touchstart', handleGesture);
       window.removeEventListener('scroll', handleGesture);
+      window.removeEventListener('mousemove', handleGesture);
     };
   }, []);
 
