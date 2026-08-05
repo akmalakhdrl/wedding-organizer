@@ -37,7 +37,7 @@ export default function FloatingWhatsApp() {
                   <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-green-400 border-2 border-luxury-dark" />
                 </div>
                 <div>
-                  <h4 className="font-heading font-semibold text-sm text-white">Kresna Wedding Concierge</h4>
+                  <h4 className="font-heading font-semibold text-sm text-white">Kresna Management</h4>
                   <p className="text-[11px] text-white/80">Online | Respon &lt; 5 Menit</p>
                 </div>
               </div>
