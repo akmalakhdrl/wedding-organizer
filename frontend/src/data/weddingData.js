@@ -1,5 +1,6 @@
 export const brandConfig = {
   name: "Kresna Management",
+  logo: "/logo.png",
   tagline: "Crafting Timeless Moments of Royalty & Romance",
   subtitle: "Penyelenggara Pernikahan Mewah & Terpercaya di Indonesia",
   whatsappNumber: "6288806575707",

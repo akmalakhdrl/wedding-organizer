@@ -42,16 +42,18 @@ export default function Preloader({ onFinish }) {
             className="text-center relative z-10"
           >
             {/* Luxury Monogram Crest */}
-            <div className="w-24 h-24 mx-auto mb-6 relative flex items-center justify-center rounded-full border border-luxury-gold/40 bg-luxury-dark-soft/50 shadow-gold-glow">
+            <div className="w-24 h-24 mx-auto mb-6 relative flex items-center justify-center rounded-full border border-luxury-gold/40 bg-luxury-dark-soft/50 shadow-gold-glow p-2 overflow-hidden">
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-1 rounded-full border border-dashed border-luxury-gold/30"
+                className="absolute inset-1 rounded-full border border-dashed border-luxury-gold/30 pointer-events-none"
               />
-              <span className="font-heading text-4xl font-bold gold-text-shimmer tracking-widest">
-                K
-              </span>
-              <Sparkles className="absolute -top-1 -right-1 w-5 h-5 text-luxury-gold animate-pulse" />
+              <img
+                src="/logo.png"
+                alt="Kresna Management Logo"
+                className="w-full h-full object-cover rounded-full relative z-10"
+              />
+              <Sparkles className="absolute -top-1 -right-1 w-5 h-5 text-luxury-gold animate-pulse z-20" />
             </div>
 
             <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-wider text-luxury-cream mb-2">

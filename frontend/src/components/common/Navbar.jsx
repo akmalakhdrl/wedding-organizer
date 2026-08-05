@@ -77,8 +77,12 @@ export default function Navbar({ onOpenBooking, wishlistCount, onOpenWishlist })
             onClick={() => scrollToSection('home')}
             className="flex items-center gap-3 group text-left focus:outline-none"
           >
-            <div className="w-10 h-10 rounded-full border border-luxury-gold/60 flex items-center justify-center bg-luxury-dark/40 group-hover:scale-105 transition-transform duration-300 shadow-gold-glow">
-              <span className="font-heading font-bold text-lg text-luxury-gold">K</span>
+            <div className="w-10 h-10 rounded-full border border-luxury-gold/60 flex items-center justify-center bg-luxury-dark/40 group-hover:scale-105 transition-transform duration-300 shadow-gold-glow overflow-hidden">
+              <img
+                src={brandConfig.logo || "/logo.png"}
+                alt="Kresna Management Logo"
+                className="w-full h-full object-cover rounded-full"
+              />
             </div>
             <div>
               <span className="font-heading text-lg sm:text-xl font-bold tracking-wider gold-text-shimmer block leading-tight">
