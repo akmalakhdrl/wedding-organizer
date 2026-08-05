@@ -40,30 +40,36 @@ export default function App() {
   const handlePreloaderFinish = useCallback(() => {
     setIsPreloading(false);
 
-    // Small delay to ensure DOM is ready, then play
-    setTimeout(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = 0.5;
+    audio.play()
+      .then(() => setMusicPlaying(true))
+      .catch((err) => {
+        console.log('Autoplay deferred for user gesture:', err);
+      });
+  }, []);
+
+  // Unlock audio autoplay on any first user gesture anywhere
+  useEffect(() => {
+    const handleGesture = () => {
       const audio = audioRef.current;
-      if (!audio) return;
-      audio.volume = 0.5;
-      audio.play()
-        .then(() => setMusicPlaying(true))
-        .catch(() => {
-          // Browser blocked autoplay — set up one-shot listener for first interaction
-          const unlockAudio = () => {
-            if (musicEnabledRef.current && audioRef.current) {
-              audioRef.current.play()
-                .then(() => setMusicPlaying(true))
-                .catch(() => {});
-            }
-            window.removeEventListener('click', unlockAudio);
-            window.removeEventListener('touchstart', unlockAudio);
-            window.removeEventListener('keydown', unlockAudio);
-          };
-          window.addEventListener('click', unlockAudio, { once: true });
-          window.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
-          window.addEventListener('keydown', unlockAudio, { once: true });
-        });
-    }, 300);
+      if (audio && musicEnabledRef.current && audio.paused) {
+        audio.play()
+          .then(() => setMusicPlaying(true))
+          .catch(() => {});
+      }
+    };
+
+    window.addEventListener('click', handleGesture);
+    window.addEventListener('touchstart', handleGesture, { passive: true });
+    window.addEventListener('scroll', handleGesture, { passive: true });
+
+    return () => {
+      window.removeEventListener('click', handleGesture);
+      window.removeEventListener('touchstart', handleGesture);
+      window.removeEventListener('scroll', handleGesture);
+    };
   }, []);
 
   // Observe Home section visibility — pause/resume

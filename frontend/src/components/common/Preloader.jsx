@@ -1,28 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Heart } from 'lucide-react';
+import { Sparkles, Heart, ArrowRight } from 'lucide-react';
 
 export default function Preloader({ onFinish }) {
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
-          setTimeout(() => {
-            setIsLoading(false);
-            if (onFinish) onFinish();
-          }, 400);
+          setIsReady(true);
           return 100;
         }
-        return prev + 2;
+        return prev + 4;
       });
-    }, 25);
+    }, 30);
 
     return () => clearInterval(timer);
-  }, [onFinish]);
+  }, []);
+
+  const handleEnter = () => {
+    setIsLoading(false);
+    if (onFinish) onFinish();
+  };
 
   return (
     <AnimatePresence>
@@ -31,6 +34,7 @@ export default function Preloader({ onFinish }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#1A1817] text-white px-4 select-none overflow-hidden"
+          onClick={isReady ? handleEnter : undefined}
         >
           {/* Background Ambient Glow */}
           <div className="absolute w-[500px] h-[500px] bg-[#D4AF37]/10 rounded-full blur-[120px] pointer-events-none" />
@@ -76,11 +80,27 @@ export default function Preloader({ onFinish }) {
               />
             </div>
 
-            {/* Percentage Indicator */}
-            <div className="mt-4 flex items-center justify-center gap-2 text-xs text-luxury-gold/80 font-mono">
-              <Heart className="w-3.5 h-3.5 fill-luxury-gold animate-ping" />
-              <span>{progress}%</span>
-            </div>
+            {/* Percentage Indicator or Enter Button */}
+            {!isReady ? (
+              <div className="mt-4 flex items-center justify-center gap-2 text-xs text-luxury-gold/80 font-mono">
+                <Heart className="w-3.5 h-3.5 fill-luxury-gold animate-ping" />
+                <span>{progress}%</span>
+              </div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-6"
+              >
+                <button
+                  onClick={handleEnter}
+                  className="px-8 py-3 rounded-full bg-gold-gradient text-luxury-dark font-bold text-xs uppercase tracking-widest shadow-gold-glow hover:scale-105 transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer"
+                >
+                  <span>Masuk Website</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </motion.div>
+            )}
           </motion.div>
         </motion.div>
       )}

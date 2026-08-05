@@ -39,7 +39,7 @@ export default function HeroSection({
             style={{ animationDuration: '4s' }}
           />
           <span className="font-medium hidden sm:inline text-[11px] uppercase tracking-wider">
-            {musicPlaying ? 'Musik Aktif' : !musicEnabled ? 'Musik Mati' : 'Memuat...'}
+            {musicPlaying ? 'Musik Aktif' : !musicEnabled ? 'Musik Mati' : 'Putar Musik'}
           </span>
         </button>
 
