@@ -15,7 +15,6 @@ import HeroSection from './components/sections/HeroSection';
 import AboutSection from './components/sections/AboutSection';
 import ServicesSection from './components/sections/ServicesSection';
 import PackagesSection from './components/sections/PackagesSection';
-import BudgetEstimatorSection from './components/sections/BudgetEstimatorSection';
 import AvailabilityCalendarSection from './components/sections/AvailabilityCalendarSection';
 import ConceptWishlistSection from './components/sections/ConceptWishlistSection';
 import GallerySection from './components/sections/GallerySection';
@@ -157,11 +156,6 @@ export default function App() {
         {/* Section 4: Wedding Packages */}
         <PackagesSection
           onSelectPackage={(pkg) => handleOpenBooking(pkg)}
-        />
-
-        {/* Section 5: Budget Estimator Tool */}
-        <BudgetEstimatorSection
-          onOpenBooking={handleOpenBooking}
         />
 
         {/* Section 6: Concept Wishlist Builder */}

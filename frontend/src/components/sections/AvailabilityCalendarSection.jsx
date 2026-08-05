@@ -57,7 +57,7 @@ export default function AvailabilityCalendarSection({ onOpenBooking }) {
             <span className="gold-text-shimmer italic font-normal">Jadwal Pernikahan Anda</span>
           </h2>
           <p className="text-xs sm:text-sm text-luxury-dark-muted font-light leading-relaxed">
-            Aura WO membatasi maksimal 2 pernikahan per hari demi menjaga eksklusivitas & kualitas layanan. Periksa tanggal impian Anda di bawah ini.
+            Kresna Management membatasi maksimal 2 pernikahan per hari demi menjaga eksklusivitas & kualitas layanan. Periksa tanggal impian Anda di bawah ini.
           </p>
         </div>
 

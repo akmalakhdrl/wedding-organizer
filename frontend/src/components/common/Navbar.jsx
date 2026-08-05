@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Heart, PhoneCall, Sparkles, Calendar, Calculator } from 'lucide-react';
+import { Menu, X, Heart, Sparkles } from 'lucide-react';
 import { brandConfig } from '../../data/weddingData';
 
 export default function Navbar({ onOpenBooking, wishlistCount, onOpenWishlist }) {
@@ -135,15 +135,6 @@ export default function Navbar({ onOpenBooking, wishlistCount, onOpenWishlist })
                 </span>
               )}
             </button>
-
-            {/* Konsultasi Gratis CTA */}
-            <button
-              onClick={() => onOpenBooking()}
-              className="px-5 py-2.5 rounded-full bg-gold-gradient text-luxury-dark font-medium text-xs tracking-wider uppercase shadow-gold-glow hover:shadow-luxury-hover hover:scale-105 transition-all duration-300 flex items-center gap-2"
-            >
-              <Sparkles className="w-4 h-4 text-luxury-dark fill-luxury-dark" />
-              <span>Konsultasi Gratis</span>
-            </button>
           </div>
 
           {/* Mobile Right Controls */}
@@ -195,18 +186,7 @@ export default function Navbar({ onOpenBooking, wishlistCount, onOpenWishlist })
                 </button>
               ))}
 
-              <div className="pt-4 space-y-3">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenBooking();
-                  }}
-                  className="w-full py-3 rounded-full bg-gold-gradient text-luxury-dark font-semibold text-xs tracking-wider uppercase text-center shadow-gold-glow flex items-center justify-center gap-2"
-                >
-                  <PhoneCall className="w-4 h-4" />
-                  <span>Konsultasi Gratis Sekarang</span>
-                </button>
-              </div>
+
             </div>
           </motion.div>
         )}

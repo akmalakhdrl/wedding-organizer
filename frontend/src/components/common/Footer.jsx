@@ -76,11 +76,6 @@ export default function Footer({ onOpenBooking }) {
                 </button>
               </li>
               <li>
-                <button onClick={() => scrollToSection('estimator')} className="hover:text-luxury-gold transition-colors">
-                  Kalkulator Biaya
-                </button>
-              </li>
-              <li>
                 <button onClick={() => scrollToSection('gallery')} className="hover:text-luxury-gold transition-colors">
                   Galeri Portofolio
                 </button>

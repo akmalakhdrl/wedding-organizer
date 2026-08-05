@@ -27,7 +27,7 @@ export default function FaqSection() {
             <span className="gold-text-shimmer italic font-normal">(FAQ & Informasi)</span>
           </h2>
           <p className="text-xs sm:text-sm text-luxury-dark-muted font-light leading-relaxed">
-            Temukan jawaban langsung mengenai alur kerja, sistem pembayaran, dan layanan Aura Wedding Organizer.
+            Temukan jawaban langsung mengenai alur kerja, sistem pembayaran, dan layanan Kresna Management.
           </p>
         </div>
 

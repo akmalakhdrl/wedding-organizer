@@ -24,7 +24,7 @@ export default function TestimonialsSection() {
           </div>
           <h2 className="font-heading text-3xl sm:text-5xl font-bold leading-tight">
             Kisah Bahagia Bersama <br />
-            <span className="gold-text-shimmer italic font-normal">Aura Wedding Organizer</span>
+            <span className="gold-text-shimmer italic font-normal">Kresna Management</span>
           </h2>
           <p className="text-xs sm:text-sm text-luxury-dark-muted font-light leading-relaxed">
             Dengar langsung pengakuan tulus dari pasangan pengantin yang telah memercayakan hari paling bersejarah mereka kepada kami.

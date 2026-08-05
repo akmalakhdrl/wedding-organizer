@@ -442,7 +442,7 @@ export const testimonialsData = [
     packageUsed: "Gold Royalty Package",
     rating: 5,
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=300&auto=format&fit=crop",
-    review: "Aura WO benar-benar penyelamat kami! Dari awal persiapan 8 bulan lalu, mbak Victoria dan tim sangat solutif. Di hari H, kami dan orang tua benar-benar tinggal duduk manis menikmati acara tanpa kepikiran apa pun. Dekorasi & rundown persis 100% seperti moodboard!"
+    review: "Kresna Management benar-benar penyelamat kami! Dari awal persiapan 8 bulan lalu, tim sangat solutif. Di hari H, kami dan orang tua benar-benar tinggal duduk manis menikmati acara tanpa kepikiran apa pun. Dekorasi & rundown persis 100% seperti moodboard!"
   },
   {
     id: 2,
@@ -452,7 +452,7 @@ export const testimonialsData = [
     packageUsed: "Platinum Grandeur (Destination Wedding)",
     rating: 5,
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&auto=format&fit=crop",
-    review: "Tim yang sangat pro dan berkelas! Mengurus pesta pernikahan outdoor tebing di Bali dari Jakarta bukan hal mudah, tapi Aura WO mengeksekusinya tanpa celah. Semua tamu dari Singapura dan Australia kagum melihat kelancaran acara dan estetika dekornya."
+    review: "Tim yang sangat pro dan berkelas! Mengurus pesta pernikahan outdoor tebing di Bali dari Jakarta bukan hal mudah, tapi Kresna Management mengeksekusinya tanpa celah. Semua tamu dari Singapura dan Australia kagum melihat kelancaran acara dan estetika dekornya."
   },
   {
     id: 3,
@@ -462,7 +462,7 @@ export const testimonialsData = [
     packageUsed: "Silver Elegance + Custom Addons",
     rating: 5,
     avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=300&auto=format&fit=crop",
-    review: "Sebagai dokter yang jadwalnya sangat padat, kami hampir tak punya waktu luang. Aura WO mengambil alih koordinasi dengan 15 vendor secara sempurna. Komunikasi via WhatsApp sangat responsif dan transparan dari segi budget. Highly recommended!"
+    review: "Sebagai dokter yang jadwalnya sangat padat, kami hampir tak punya waktu luang. Kresna Management mengambil alih koordinasi dengan 15 vendor secara sempurna. Komunikasi via WhatsApp sangat responsif dan transparan dari segi budget. Highly recommended!"
   }
 ];
 
@@ -531,12 +531,12 @@ export const faqData = [
   },
   {
     id: 2,
-    question: "Berapa bulan idealnya kami mulai menggunakan jasa Aura WO?",
+    question: "Berapa bulan idealnya kami mulai menggunakan jasa Kresna Management?",
     answer: "Waktu paling ideal adalah 6 hingga 12 bulan sebelum tanggal pernikahan, terutama untuk mengamankan venue favorit dan vendor bintang lima. Namun kami juga berpengalaman menangani express wedding dalam kurun waktu 2-3 bulan."
   },
   {
     id: 3,
-    question: "Apakah Aura WO dapat menyesuaikan dengan budget yang kami miliki?",
+    question: "Apakah Kresna Management dapat menyesuaikan dengan budget yang kami miliki?",
     answer: "Tentu saja! Selain paket rekomendasi Silver, Gold, dan Platinum, kami memiliki layanan 'Custom Bespoke VIP' di mana kami mengalokasikan item vendor secara rasional berdasarkan angka budget yang Anda tetapkan."
   },
   {
@@ -546,17 +546,17 @@ export const faqData = [
   },
   {
     id: 5,
-    question: "Apakah Aura WO melayani acara di luar kota atau luar negeri (Destination Wedding)?",
+    question: "Apakah Kresna Management melayani acara di luar kota atau luar negeri (Destination Wedding)?",
     answer: "Ya, kami berpengalaman mengeksekusi Destination Wedding di Bali, Bandung, Yogyakarta, Surabaya, Labuan Bajo, hingga Singapura."
   },
   {
     id: 6,
-    question: "Bagaimana sistem pembayaran dan skema DP di Aura WO?",
+    question: "Bagaimana sistem pembayaran dan skema DP di Kresna Management?",
     answer: "Pembayaran dilakukan dalam 3 tahap: DP 30% saat booking penguncian tanggal, Tahap ke-2 40% pada H-2 bulan (saat Technical Meeting), dan Pelunasan 30% pada H-2 minggu sebelum hari H."
   },
   {
     id: 7,
-    question: "Apakah kami boleh membawa vendor langganan sendiri di luar mitra Aura WO?",
+    question: "Apakah kami boleh membawa vendor langganan sendiri di luar mitra Kresna Management?",
     answer: "Sangat boleh! Kami dengan senang hati berkolaborasi dan mengoordinasikan vendor pilihan keluarga Anda agar menyatu harmonis dengan standar tim kami."
   },
   {

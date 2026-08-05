@@ -43,7 +43,7 @@ export default function BookingModal({ isOpen, onClose, selectedPackage }) {
       console.warn('API backend not reached, proceeding to WhatsApp directly.', err);
     }
 
-    const waText = `Halo Aura Wedding Organizer! Saya ingin mengajukan booking/konsultasi pernikahan:
+    const waText = `Halo Kresna Management! Saya ingin mengajukan booking/konsultasi pernikahan:
 
 *Nama Pasangan:* ${formData.coupleName}
 *Email:* ${formData.email}
@@ -247,7 +247,7 @@ Mohon informasi ketersediaan jadwal & sesi konsultasi. Terima kasih!`;
                 Permintaan Berhasil Terkirim!
               </h3>
               <p className="text-xs sm:text-sm text-luxury-cream/80 max-w-md mx-auto leading-relaxed">
-                Terima kasih <span className="text-luxury-gold font-semibold">{formData.coupleName}</span>. Aplikasi WhatsApp Anda sedang dibuka untuk menghubungkan Anda secara langsung dengan Senior Wedding Planner Aura WO.
+                Terima kasih <span className="text-luxury-gold font-semibold">{formData.coupleName}</span>. Aplikasi WhatsApp Anda sedang dibuka untuk menghubungkan Anda secara langsung dengan Senior Wedding Planner Kresna Management.
               </p>
               <button
                 onClick={handleReset}
