@@ -161,10 +161,15 @@ app.post('/api/estimator', (req, res) => {
   });
 });
 
-// Start Express Server
-app.listen(PORT, () => {
-  console.log(`==================================================`);
-  console.log(`👑 Aura Luxury Wedding Organizer REST API Online!`);
-  console.log(`🚀 Running at: http://localhost:${PORT}`);
-  console.log(`==================================================`);
-});
+// Export default app for Vercel Serverless Functions
+export default app;
+
+// Start Express Server locally if not running on Vercel
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`==================================================`);
+    console.log(`👑 Aura Luxury Wedding Organizer REST API Online!`);
+    console.log(`🚀 Running at: http://localhost:${PORT}`);
+    console.log(`==================================================`);
+  });
+}
