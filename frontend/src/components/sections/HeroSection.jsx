@@ -3,18 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, ChevronLeft, ChevronRight, Volume2, VolumeX, Music } from 'lucide-react';
 import { heroSlides } from '../../data/weddingData';
 
-export default function HeroSection({ onOpenBooking, scrollToSection }) {
+export default function HeroSection({ isPreloading, onOpenBooking, scrollToSection }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [userPaused, setUserPaused] = useState(false);
-
   const audioRef = useRef(null);
-  const userPausedRef = useRef(false);
-
-  useEffect(() => {
-    userPausedRef.current = userPaused;
-  }, [userPaused]);
 
   // Slide auto-advance
   useEffect(() => {
@@ -27,34 +19,26 @@ export default function HeroSection({ onOpenBooking, scrollToSection }) {
   // Audio Play / Pause Helper
   const playAudio = useCallback(() => {
     const audio = audioRef.current;
-    if (!audio || userPausedRef.current) return;
-
+    if (!audio) return;
     audio.volume = 0.5;
-    audio.play()
-      .then(() => setIsPlaying(true))
-      .catch(() => {
-        // If browser blocks autoplay without user gesture, unlock on first click or touch
-        const unlock = () => {
-          if (!userPausedRef.current && audioRef.current) {
-            audioRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
-          }
-          window.removeEventListener('click', unlock);
-          window.removeEventListener('touchstart', unlock);
-        };
-        window.addEventListener('click', unlock, { once: true });
-        window.addEventListener('touchstart', unlock, { once: true });
-      });
+    
+    // Play immediately. If blocked by browser policy, it will throw NotAllowedError.
+    audio.play().catch((err) => {
+      console.warn("Autoplay prevented by browser policy:", err);
+    });
   }, []);
 
   const pauseAudio = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
     audio.pause();
-    setIsPlaying(false);
   }, []);
 
-  // IntersectionObserver: Play when Home is visible, Pause when scrolled away
+  // Play when Home is visible (and preloader finished), Pause when scrolled away
   useEffect(() => {
+    // Wait until preloader finishes before trying to play
+    if (isPreloading) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -72,30 +56,21 @@ export default function HeroSection({ onOpenBooking, scrollToSection }) {
     return () => {
       if (homeEl) observer.unobserve(homeEl);
     };
-  }, [playAudio, pauseAudio]);
-
-  // Toggle Music On/Off by clicking the music icon
-  const toggleMusic = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (isPlaying) {
-      setUserPaused(true);
-      userPausedRef.current = true;
-      pauseAudio();
-    } else {
-      setUserPaused(false);
-      userPausedRef.current = false;
-      playAudio();
-    }
-  };
+  }, [isPreloading, playAudio, pauseAudio]);
 
   // Toggle Mute/Unmute
   const toggleMute = () => {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.muted = !isMuted;
-    setIsMuted(!isMuted);
+    
+    const newMuted = !isMuted;
+    audio.muted = newMuted;
+    setIsMuted(newMuted);
+    
+    // If it was paused (e.g., blocked by autoplay policy), try to play it when user interacts
+    if (audio.paused) {
+      audio.play().catch(e => console.error(e));
+    }
   };
 
   const slide = heroSlides[currentSlide];
@@ -111,19 +86,19 @@ export default function HeroSection({ onOpenBooking, scrollToSection }) {
         src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-piano-112191.mp3"
       />
 
-      {/* ── Single Music Control Button ────────────────────────────── */}
+      {/* ── Single Music Control Button (Mute/Unmute) ── */}
       <button
-        onClick={toggleMusic}
+        onClick={toggleMute}
         className="absolute top-28 right-6 z-30 flex items-center gap-2 bg-luxury-dark/80 backdrop-blur-md px-4 py-2 rounded-full border border-luxury-gold/30 shadow-gold-glow hover:border-luxury-gold hover:scale-105 transition-all duration-300 focus:outline-none"
-        title={isPlaying ? 'Matikan Musik' : 'Nyalakan Musik'}
+        title={isMuted ? 'Nyalakan Suara' : 'Matikan Suara'}
       >
-        {isPlaying ? (
+        {!isMuted ? (
           <Volume2 className="w-4 h-4 text-luxury-gold animate-pulse" />
         ) : (
           <VolumeX className="w-4 h-4 text-luxury-gold/60" />
         )}
         <span className="font-medium hidden sm:inline text-[11px] uppercase tracking-wider text-luxury-cream">
-          {isPlaying ? 'Musik Aktif' : 'Musik Mati'}
+          {!isMuted ? 'Suara Aktif' : 'Suara Mati'}
         </span>
       </button>
 

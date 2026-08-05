@@ -141,6 +141,7 @@ export default function App() {
       <main>
         {/* Section 1: Hero */}
         <HeroSection
+          isPreloading={isPreloading}
           onOpenBooking={() => handleOpenBooking()}
           scrollToSection={scrollToSection}
         />
