@@ -109,11 +109,6 @@ export default function Footer({ onOpenBooking }) {
         {/* Bottom copyright row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-luxury-cream/60 gap-4">
           <p>© 2026 {brandConfig.name}. All Rights Reserved. Designed with Excellence.</p>
-          <div className="flex items-center gap-1 text-luxury-gold/80">
-            <span>Crafted with</span>
-            <Heart className="w-3.5 h-3.5 fill-luxury-gold text-luxury-gold" />
-            <span>for your special day</span>
-          </div>
         </div>
       </div>
     </footer>

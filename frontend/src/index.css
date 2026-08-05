@@ -53,6 +53,7 @@
   backdrop-filter: blur(12px);
   border: 1px solid rgba(239, 230, 221, 0.8);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 .glass-card:hover {

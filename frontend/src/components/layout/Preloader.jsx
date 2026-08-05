@@ -33,7 +33,7 @@ export default function Preloader({ onFinish }) {
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#1A1817] text-white px-4 select-none overflow-hidden"
         >
           {/* Background Ambient Glow */}
-          <div className="absolute w-[500px] h-[500px] bg-[#D4AF37]/10 rounded-full blur-[120px] pointer-events-none" />
+          <div className="hidden md:block absolute w-[500px] h-[500px] bg-[#D4AF37]/10 rounded-full blur-[120px] pointer-events-none" />
 
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
