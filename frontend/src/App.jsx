@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, X, Trash2, ArrowRight, Sparkles } from 'lucide-react';
 
@@ -27,6 +27,88 @@ import ContactSection from './components/sections/ContactSection';
 export default function App() {
   const [isPreloading, setIsPreloading] = useState(true);
   
+  // ─── Background Music State (App-level) ────────────────────────────────────
+  const audioRef      = useRef(null);
+  const [musicPlaying, setMusicPlaying] = useState(false);
+  const [musicMuted,   setMusicMuted]   = useState(false);
+  const [musicEnabled, setMusicEnabled] = useState(true); // user preference
+  const musicEnabledRef = useRef(true);
+
+  useEffect(() => { musicEnabledRef.current = musicEnabled; }, [musicEnabled]);
+
+  // Start music immediately when preloader finishes
+  const handlePreloaderFinish = useCallback(() => {
+    setIsPreloading(false);
+
+    // Small delay to ensure DOM is ready, then play
+    setTimeout(() => {
+      const audio = audioRef.current;
+      if (!audio) return;
+      audio.volume = 0.5;
+      audio.play()
+        .then(() => setMusicPlaying(true))
+        .catch(() => {
+          // Browser blocked autoplay — set up one-shot listener for first interaction
+          const unlockAudio = () => {
+            if (musicEnabledRef.current && audioRef.current) {
+              audioRef.current.play()
+                .then(() => setMusicPlaying(true))
+                .catch(() => {});
+            }
+            window.removeEventListener('click', unlockAudio);
+            window.removeEventListener('touchstart', unlockAudio);
+            window.removeEventListener('keydown', unlockAudio);
+          };
+          window.addEventListener('click', unlockAudio, { once: true });
+          window.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
+          window.addEventListener('keydown', unlockAudio, { once: true });
+        });
+    }, 300);
+  }, []);
+
+  // Observe Home section visibility — pause/resume
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      const audio = audioRef.current;
+      if (!audio || !musicEnabledRef.current) return;
+
+      if (entry.isIntersecting) {
+        audio.play().then(() => setMusicPlaying(true)).catch(() => {});
+      } else {
+        audio.pause();
+        setMusicPlaying(false);
+      }
+    }, { threshold: 0.15 });
+
+    const el = document.getElementById('home');
+    if (el) observer.observe(el);
+    return () => { if (el) observer.unobserve(el); };
+  }, []);
+
+  const handleToggleMusic = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (musicEnabled) {
+      // Turn OFF
+      audio.pause();
+      setMusicPlaying(false);
+      setMusicEnabled(false);
+    } else {
+      // Turn ON — direct user click, so browser allows play()
+      setMusicEnabled(true);
+      musicEnabledRef.current = true;
+      audio.play().then(() => setMusicPlaying(true)).catch(() => {});
+    }
+  }, [musicEnabled]);
+
+  const handleToggleMute = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.muted = !musicMuted;
+    setMusicMuted(prev => !prev);
+  }, [musicMuted]);
+
   // Booking Modal State
   const [bookingOpen, setBookingOpen] = useState(false);
   const [selectedBookingItem, setSelectedBookingItem] = useState(null);
@@ -127,8 +209,16 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-luxury-cream text-luxury-dark selection:bg-luxury-gold selection:text-white relative">
+      {/* Global Background Audio */}
+      <audio
+        ref={audioRef}
+        loop
+        preload="auto"
+        src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-piano-112191.mp3"
+      />
+
       {/* 1. Luxury Preloader */}
-      <Preloader onFinish={() => setIsPreloading(false)} />
+      <Preloader onFinish={handlePreloaderFinish} />
 
       {/* 2. Glassmorphism Navbar */}
       <Navbar
@@ -143,6 +233,11 @@ export default function App() {
         <HeroSection
           onOpenBooking={() => handleOpenBooking()}
           scrollToSection={scrollToSection}
+          musicPlaying={musicPlaying}
+          musicMuted={musicMuted}
+          musicEnabled={musicEnabled}
+          onToggleMusic={handleToggleMusic}
+          onToggleMute={handleToggleMute}
         />
 
         {/* Section 2: About */}
