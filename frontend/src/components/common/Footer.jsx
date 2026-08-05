@@ -35,14 +35,14 @@ export default function Footer({ onOpenBooking }) {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full border border-luxury-gold flex items-center justify-center bg-luxury-dark-soft shadow-gold-glow">
-                <span className="font-heading font-bold text-lg text-luxury-gold">A</span>
+                <span className="font-heading font-bold text-lg text-luxury-gold">K</span>
               </div>
               <div>
-                <span className="font-heading text-xl font-bold tracking-wider gold-text-shimmer block">
-                  AURA
+                <span className="font-heading text-lg sm:text-xl font-bold tracking-wider gold-text-shimmer block">
+                  KRESNA
                 </span>
                 <span className="text-[10px] tracking-[0.2em] uppercase font-light text-luxury-cream/70 block">
-                  Wedding Organizer
+                  Management
                 </span>
               </div>
             </div>

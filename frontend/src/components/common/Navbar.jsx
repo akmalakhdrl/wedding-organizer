@@ -80,14 +80,14 @@ export default function Navbar({ onOpenBooking, wishlistCount, onOpenWishlist })
             className="flex items-center gap-3 group text-left focus:outline-none"
           >
             <div className="w-10 h-10 rounded-full border border-luxury-gold/60 flex items-center justify-center bg-luxury-dark/40 group-hover:scale-105 transition-transform duration-300 shadow-gold-glow">
-              <span className="font-heading font-bold text-lg text-luxury-gold">A</span>
+              <span className="font-heading font-bold text-lg text-luxury-gold">K</span>
             </div>
             <div>
-              <span className="font-heading text-xl sm:text-2xl font-bold tracking-wider gold-text-shimmer block leading-tight">
-                AURA
+              <span className="font-heading text-lg sm:text-xl font-bold tracking-wider gold-text-shimmer block leading-tight">
+                KRESNA
               </span>
               <span className="text-[10px] tracking-[0.2em] uppercase font-light text-luxury-cream/80 block">
-                Wedding Organizer
+                Management
               </span>
             </div>
           </button>

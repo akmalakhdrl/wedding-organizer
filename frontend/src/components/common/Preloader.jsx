@@ -49,16 +49,16 @@ export default function Preloader({ onFinish }) {
                 className="absolute inset-1 rounded-full border border-dashed border-luxury-gold/30"
               />
               <span className="font-heading text-4xl font-bold gold-text-shimmer tracking-widest">
-                A
+                K
               </span>
               <Sparkles className="absolute -top-1 -right-1 w-5 h-5 text-luxury-gold animate-pulse" />
             </div>
 
-            <h1 className="font-heading text-2xl sm:text-3xl font-semibold tracking-wider text-luxury-cream mb-2">
-              AURA <span className="text-luxury-gold font-light">WEDDING</span>
+            <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-wider text-luxury-cream mb-2">
+              KRESNA <span className="text-luxury-gold font-light">MANAGEMENT</span>
             </h1>
             <p className="text-xs sm:text-sm text-luxury-cream/70 font-light tracking-[0.25em] uppercase mb-8">
-              Luxury Wedding Organizer
+              Wedding Organizer & Event Specialist
             </p>
 
             {/* Progress Bar Container */}

@@ -1,10 +1,10 @@
 export const brandConfig = {
-  name: "Aura Wedding Organizer",
+  name: "Kresna Management",
   tagline: "Crafting Timeless Moments of Royalty & Romance",
   subtitle: "Penyelenggara Pernikahan Mewah & Terpercaya di Indonesia",
   whatsappNumber: "6281234567890",
-  whatsappMessage: "Halo Aura Wedding Organizer, saya ingin berkonsultasi mengenai paket pernikahan.",
-  email: "info@aurawedding.co.id",
+  whatsappMessage: "Halo Kresna Management, saya ingin berkonsultasi mengenai paket pernikahan.",
+  email: "info@kresnamanagement.co.id",
   phone: "+62 812 3456 7890",
   address: "Jl. Senopati No. 88, Kebayoran Baru, Jakarta Selatan 12190",
   googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.275512879555!2d106.80556217499037!3d-6.227362993760773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f14d1a21e75d%3A0x6b107bfa443425b0!2sSenopati%2C%20Kebayoran%20Baru%2C%20South%20Jakarta%20City%2C%20Jakarta!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid",
@@ -52,8 +52,8 @@ export const statsData = [
 ];
 
 export const aboutData = {
-  profile: "Aura Wedding Organizer adalah wedding planner & coordinator boutique mewah yang didirikan sejak tahun 2014. Kami berdedikasi menciptakan perayaan cinta yang tak terlupakan dengan memadukan estetika visual kontemporer, tradisi adab yang agung, serta eksekusi operasional yang tanpa cela.",
-  story: "Berawal dari passion mendalam terhadap keindahan dan keharmonisan momen suci, Aura tumbuh menjadi standar emas penyelenggara pernikahan luxury di Indonesia. Setiap pernikahan adalah mahakarya unik yang kami rancang dari nol khusus untuk Anda.",
+  profile: "Kresna Management adalah wedding planner & coordinator boutique mewah yang didirikan sejak tahun 2014. Kami berdedikasi menciptakan perayaan cinta yang tak terlupakan dengan memadukan estetika visual kontemporer, tradisi adab yang agung, serta eksekusi operasional yang tanpa cela.",
+  story: "Berawal dari passion mendalam terhadap keindahan dan keharmonisan momen suci, Kresna Management tumbuh menjadi standar emas penyelenggara pernikahan luxury di Indonesia. Setiap pernikahan adalah mahakarya unik yang kami rancang dari nol khusus untuk Anda.",
   vision: "Menjadi penyelenggara pernikahan mewah nomor 1 di Indonesia yang dikenal akan kreasi artistik berkelas dunia, transparansi, dan layanan penuh kehangatan.",
   mission: [
     "Merancang konsep pernikahan presisi sesuai impian & karakter pasangan.",
