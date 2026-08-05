@@ -1,48 +1,54 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Clock, Instagram, Youtube, Send, Sparkles, CheckCircle } from 'lucide-react';
+import { Phone, MapPin, Clock, Instagram, MessageCircle, Sparkles } from 'lucide-react';
 import { brandConfig } from '../../data/weddingData';
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    date: '',
-    message: ''
-  });
-
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-
-    const waText = `Halo Aura Wedding Organizer!
-
-*Nama:* ${formData.name}
-*No. WhatsApp:* ${formData.phone}
-*Email:* ${formData.email}
-*Rencana Tanggal:* ${formData.date || '-'}
-*Pesan/Pertanyaan:* ${formData.message}
-
-Mohon dapat dihubungi untuk konsultasi pernikahan. Terima kasih!`;
-
-    setTimeout(() => {
-      const encoded = encodeURIComponent(waText);
-      window.open(`https://wa.me/${brandConfig.whatsappNumber}?text=${encoded}`, '_blank');
-    }, 1000);
+  const handleWhatsApp = () => {
+    const msg = encodeURIComponent(brandConfig.whatsappMessage);
+    window.open(`https://wa.me/${brandConfig.whatsappNumber}?text=${msg}`, '_blank');
   };
+
+  const contactCards = [
+    {
+      icon: <MapPin className="w-6 h-6" />,
+      label: 'Alamat Galeri',
+      value: brandConfig.address,
+    },
+    {
+      icon: <Phone className="w-6 h-6" />,
+      label: 'WhatsApp Hotline',
+      value: brandConfig.phone,
+    },
+    {
+      icon: <Clock className="w-6 h-6" />,
+      label: 'Jam Operasional',
+      value: brandConfig.operatingHours,
+    },
+    {
+      icon: <Instagram className="w-6 h-6" />,
+      label: 'Instagram',
+      value: '@kresna_managemnt',
+      link: brandConfig.socials.instagram,
+    },
+  ];
 
   return (
     <section id="contact" className="py-24 bg-luxury-dark text-luxury-cream relative overflow-hidden">
       {/* Ambient Lighting */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-luxury-gold/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-luxury-gold/8 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-luxury-gold/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
-        
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14">
+
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-center max-w-3xl mx-auto space-y-4"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-luxury-gold/20 text-luxury-gold text-xs font-semibold uppercase tracking-wider border border-luxury-gold/30">
             <Phone className="w-3.5 h-3.5" /> Hubungi Kami
           </div>
@@ -51,169 +57,95 @@ Mohon dapat dihubungi untuk konsultasi pernikahan. Terima kasih!`;
             <span className="gold-text-shimmer italic font-normal">Pernikahan Impian Anda</span>
           </h2>
           <p className="text-xs sm:text-sm text-luxury-cream/70 font-light leading-relaxed">
-            Jadwalkan sesi konsultasi tatap muka (coffee meeting) di galeri kami atau terhubung secara fleksibel via virtual call.
+            Jadwalkan sesi konsultasi tatap muka di galeri kami atau terhubung secara fleksibel via WhatsApp.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Contact Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left Contact Info & Map (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="p-6 sm:p-8 rounded-3xl bg-luxury-dark-soft border border-luxury-gold/30 shadow-2xl glass-panel-dark space-y-6">
-              <h3 className="font-heading text-xl font-bold text-white gold-text-shimmer">
-                Galeri & Kantor Pusat
-              </h3>
-
-              <div className="space-y-4 text-xs sm:text-sm">
-                <div className="flex items-start gap-3">
-                  <div className="p-2.5 rounded-xl bg-luxury-gold/10 border border-luxury-gold/30 text-luxury-gold shrink-0">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-luxury-gold font-semibold block">Alamat Galeri:</span>
-                    <p className="text-luxury-cream/80 font-light mt-0.5">{brandConfig.address}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-luxury-gold/10 border border-luxury-gold/30 text-luxury-gold shrink-0">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-luxury-gold font-semibold block">WhatsApp Hotline:</span>
-                    <p className="text-luxury-cream/80 font-light mt-0.5">{brandConfig.phone}</p>
-                  </div>
-                </div>
-
-
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-luxury-gold/10 border border-luxury-gold/30 text-luxury-gold shrink-0">
-                    <Clock className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-luxury-gold font-semibold block">Jam Operasional:</span>
-                    <p className="text-luxury-cream/80 font-light mt-0.5">{brandConfig.operatingHours}</p>
-                  </div>
-                </div>
+        {/* Contact Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {contactCards.map((card, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1, duration: 0.6 }}
+              onClick={card.link ? () => window.open(card.link, '_blank') : undefined}
+              className={`p-6 rounded-3xl bg-luxury-dark-soft border border-luxury-gold/25 shadow-xl space-y-3 hover:border-luxury-gold/60 hover:shadow-gold-glow transition-all duration-300 ${card.link ? 'cursor-pointer' : ''}`}
+            >
+              <div className="p-3 w-fit rounded-2xl bg-luxury-gold/10 border border-luxury-gold/30 text-luxury-gold">
+                {card.icon}
               </div>
-            </div>
-
-            {/* Google Maps Embed Card */}
-            <div className="rounded-3xl overflow-hidden border border-luxury-gold/20 shadow-xl h-64">
-              <iframe
-                src={brandConfig.googleMapsEmbed}
-                title="Aura Wedding Location"
-                className="w-full h-full border-0"
-                allowFullScreen
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          {/* Right Direct Consultation Form (7 cols) */}
-          <div className="lg:col-span-7 p-6 sm:p-10 rounded-3xl bg-luxury-dark-soft border border-luxury-gold/30 shadow-2xl glass-panel-dark">
-            <h3 className="font-heading text-2xl font-bold text-white mb-2">
-              Kirim Pesan Konsultasi
-            </h3>
-            <p className="text-xs text-luxury-cream/70 font-light mb-6">
-              Isi data di bawah ini untuk terhubung langsung dengan Tim Senior Wedding Planner kami.
-            </p>
-
-            {!submitted ? (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-luxury-gold mb-1">
-                      Nama Lengkap Anda *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Masukkan nama..."
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-luxury-dark border border-luxury-gold/20 text-xs sm:text-sm text-white placeholder-luxury-cream/30 focus:outline-none focus:border-luxury-gold"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-luxury-gold mb-1">
-                      Nomor WhatsApp *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="0812xxxxxxxx"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-luxury-dark border border-luxury-gold/20 text-xs sm:text-sm text-white placeholder-luxury-cream/30 focus:outline-none focus:border-luxury-gold"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-luxury-gold mb-1">
-                      Alamat Email
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="email@domain.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-luxury-dark border border-luxury-gold/20 text-xs sm:text-sm text-white placeholder-luxury-cream/30 focus:outline-none focus:border-luxury-gold"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-luxury-gold mb-1">
-                      Perkiraan Tanggal Pernikahan
-                    </label>
-                    <input
-                      type="date"
-                      value={formData.date}
-                      onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-luxury-dark border border-luxury-gold/20 text-xs sm:text-sm text-white placeholder-luxury-cream/30 focus:outline-none focus:border-luxury-gold"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-luxury-gold mb-1">
-                    Pesan / Pertanyaan Spesifik *
-                  </label>
-                  <textarea
-                    rows={4}
-                    required
-                    placeholder="Ceritakan gambaran singkat pernikahan yang Anda inginkan..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-luxury-dark border border-luxury-gold/20 text-xs sm:text-sm text-white placeholder-luxury-cream/30 focus:outline-none focus:border-luxury-gold"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-4 rounded-full bg-gold-gradient text-luxury-dark font-bold text-xs sm:text-sm uppercase tracking-wider shadow-gold-glow hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>Kirim Pesan Ke WhatsApp Planner</span>
-                </button>
-              </form>
-            ) : (
-              <div className="py-12 text-center space-y-4">
-                <CheckCircle className="w-12 h-12 text-green-400 mx-auto" />
-                <h4 className="font-heading text-xl font-bold text-white">Terima Kasih, Pesan Anda Terikirim!</h4>
-                <p className="text-xs text-luxury-cream/70 max-w-sm mx-auto">
-                  Aplikasi WhatsApp Anda sedang dibuka secara otomatis.
+              <div>
+                <span className="text-[11px] uppercase tracking-widest text-luxury-gold font-semibold block mb-1">
+                  {card.label}
+                </span>
+                <p className="text-xs sm:text-sm text-luxury-cream/85 font-light leading-relaxed">
+                  {card.value}
                 </p>
               </div>
-            )}
-          </div>
-
+            </motion.div>
+          ))}
         </div>
 
+        {/* Map + CTA Row */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
+          {/* Google Maps */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-8 rounded-3xl overflow-hidden border border-luxury-gold/20 shadow-2xl h-80 lg:h-96"
+          >
+            <iframe
+              src={brandConfig.googleMapsEmbed}
+              title="Kresna Management Location"
+              className="w-full h-full border-0"
+              allowFullScreen
+              loading="lazy"
+            />
+          </motion.div>
+
+          {/* WhatsApp CTA Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-4 p-8 rounded-3xl bg-luxury-dark-soft border border-luxury-gold/30 shadow-2xl flex flex-col justify-between gap-6"
+          >
+            <div className="space-y-3">
+              <div className="p-3 w-fit rounded-2xl bg-luxury-gold/10 border border-luxury-gold/30 text-luxury-gold">
+                <MessageCircle className="w-7 h-7" />
+              </div>
+              <h3 className="font-heading text-xl sm:text-2xl font-bold text-white leading-tight">
+                Konsultasi Langsung via WhatsApp
+              </h3>
+              <p className="text-xs sm:text-sm text-luxury-cream/70 font-light leading-relaxed">
+                Hubungi tim kami sekarang untuk mendapatkan informasi lengkap tentang paket & ketersediaan tanggal.
+              </p>
+              <ul className="space-y-1.5 text-xs text-luxury-cream/70 font-light">
+                {['Respons cepat & ramah', 'Konsultasi 100% gratis', 'Tersedia 7 hari seminggu'].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <Sparkles className="w-3 h-3 text-luxury-gold shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <button
+              onClick={handleWhatsApp}
+              className="w-full py-4 rounded-full bg-gold-gradient text-luxury-dark font-bold text-xs sm:text-sm uppercase tracking-wider shadow-gold-glow hover:scale-[1.02] hover:shadow-luxury-hover transition-all flex items-center justify-center gap-2"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>Chat WhatsApp Sekarang</span>
+            </button>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
