@@ -57,7 +57,7 @@ export default function AboutSection() {
             className="lg:col-span-7 space-y-6 text-luxury-dark"
           >
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-luxury-gold/15 text-luxury-gold-dark text-xs font-semibold uppercase tracking-wider border border-luxury-gold/30">
-              <Sparkles className="w-3.5 h-3.5" /> Tentang Aura Wedding Organizer
+              <Sparkles className="w-3.5 h-3.5" /> Tentang Kresna Management
             </div>
 
             <h2 className="font-heading text-3xl sm:text-5xl font-bold leading-tight">
