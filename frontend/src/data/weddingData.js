@@ -10,7 +10,7 @@ export const brandConfig = {
   googleMapsEmbed: "https://maps.google.com/maps?q=5RJ8%2B746+Pasuruhan+Kidul+Kudus+Jawa+Tengah&output=embed",
   operatingHours: "Senin - Minggu: 09.00 - 20.00 WIB",
   socials: {
-    instagram: "https://instagram.com/aurawedding.id",
+    instagram: "https://www.instagram.com/kresna_managemnt?igsh=MXdlMm4xaHBnNGtscg==",
     tiktok: "https://tiktok.com/@aurawedding.id",
     youtube: "https://youtube.com/c/aurawedding",
     facebook: "https://facebook.com/aurawedding"
