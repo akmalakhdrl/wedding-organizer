@@ -96,11 +96,6 @@ export default function Footer({ onOpenBooking }) {
                 </button>
               </li>
               <li>
-                <button onClick={() => scrollToSection('calendar')} className="hover:text-luxury-gold transition-colors">
-                  Cek Ketersediaan Tanggal
-                </button>
-              </li>
-              <li>
                 <button onClick={() => scrollToSection('gallery')} className="hover:text-luxury-gold transition-colors">
                   Galeri Portofolio
                 </button>

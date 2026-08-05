@@ -164,12 +164,7 @@ export default function App() {
           onOpenBooking={handleOpenBooking}
         />
 
-        {/* Section 6: Date Availability Calendar Tool */}
-        <AvailabilityCalendarSection
-          onOpenBooking={handleOpenBooking}
-        />
-
-        {/* Section 7: Concept Wishlist Builder */}
+        {/* Section 6: Concept Wishlist Builder */}
         <ConceptWishlistSection
           savedWishlist={savedWishlist}
           onToggleWishlist={handleToggleWishlist}

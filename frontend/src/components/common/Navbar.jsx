@@ -14,7 +14,6 @@ export default function Navbar({ onOpenBooking, wishlistCount, onOpenWishlist })
     { id: 'services', label: 'Layanan' },
     { id: 'packages', label: 'Paket' },
     { id: 'estimator', label: 'Kalkulator' },
-    { id: 'calendar', label: 'Kalender' },
     { id: 'gallery', label: 'Galeri' },
     { id: 'process', label: 'Alur' },
     { id: 'faq', label: 'FAQ' },

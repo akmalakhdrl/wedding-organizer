@@ -121,15 +121,7 @@ export default function HeroSection({ onOpenBooking, scrollToSection }) {
               className="flex items-center gap-1.5 hover:text-luxury-gold transition-colors underline underline-offset-4"
             >
               <Calculator className="w-3.5 h-3.5 text-luxury-gold" />
-              <span>Hitung Biaya</span>
-            </button>
-            <span className="text-luxury-gold/30">•</span>
-            <button
-              onClick={() => scrollToSection('calendar')}
-              className="flex items-center gap-1.5 hover:text-luxury-gold transition-colors underline underline-offset-4"
-            >
-              <Calendar className="w-3.5 h-3.5 text-luxury-gold" />
-              <span>Cek Jadwal</span>
+              <span>Hitung Biaya Pernikahan</span>
             </button>
           </motion.div>
         </div>
