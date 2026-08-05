@@ -28,9 +28,20 @@ export default function BookingModal({ isOpen, onClose, selectedPackage }) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true);
+
+    // Call REST API Backend
+    try {
+      await fetch('http://localhost:5000/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+    } catch (err) {
+      console.warn('API backend not reached, proceeding to WhatsApp directly.', err);
+    }
 
     const waText = `Halo Aura Wedding Organizer! Saya ingin mengajukan booking/konsultasi pernikahan:
 

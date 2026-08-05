@@ -1,0 +1,35 @@
+{
+  "brandConfig": {
+    "name": "Aura Wedding Organizer",
+    "tagline": "Crafting Timeless Moments of Royalty & Romance",
+    "subtitle": "Penyelenggara Pernikahan Mewah & Terpercaya di Indonesia",
+    "whatsappNumber": "6281234567890",
+    "email": "info@aurawedding.co.id",
+    "phone": "+62 812 3456 7890",
+    "address": "Jl. Senopati No. 88, Kebayoran Baru, Jakarta Selatan 12190",
+    "operatingHours": "Senin - Minggu: 09.00 - 20.00 WIB"
+  },
+  "bookings": [
+    {
+      "id": "BOOK-1001",
+      "coupleName": "Kevin & Natasha",
+      "phone": "081234567890",
+      "email": "kevin@example.com",
+      "weddingDate": "2026-10-15",
+      "guestCount": "500 - 1.000 Undangan",
+      "city": "Jakarta (Ritz-Carlton)",
+      "packageChoice": "Gold Royalty Package",
+      "status": "CONFIRMED",
+      "createdAt": "2026-08-01T10:00:00Z"
+    }
+  ],
+  "availability": {
+    "2026-08-08": "booked",
+    "2026-08-14": "booked",
+    "2026-08-22": "booked",
+    "2026-08-29": "booked",
+    "2026-08-07": "limited",
+    "2026-08-21": "limited",
+    "2026-08-28": "limited"
+  }
+}
