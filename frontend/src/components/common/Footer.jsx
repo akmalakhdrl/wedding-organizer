@@ -1,20 +1,8 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Sparkles, MapPin, Mail, Phone, Clock, Instagram, Youtube, Send, Heart } from 'lucide-react';
+import React from 'react';
+import { Sparkles, MapPin, Phone, Clock, Instagram, Heart } from 'lucide-react';
 import { brandConfig } from '../../data/weddingData';
 
 export default function Footer({ onOpenBooking }) {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setTimeout(() => setSubscribed(false), 4000);
-      setEmail('');
-    }
-  };
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -29,7 +17,7 @@ export default function Footer({ onOpenBooking }) {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-luxury-gold/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-white/10">
           
           {/* Column 1: Brand Info */}
           <div className="space-y-4">
@@ -47,7 +35,7 @@ export default function Footer({ onOpenBooking }) {
               </div>
             </div>
             <p className="text-xs sm:text-sm text-luxury-cream/70 font-light leading-relaxed">
-              Penyelenggara pernikahan mewah & eksklusif terdepan di Indonesia. Menghadirkan keindahan sejati, estetika abadi, dan ketenangan pikiran penuh di hari bahagia Anda.
+              Penyelenggara pernikahan mewah &amp; eksklusif terdepan di Indonesia. Menghadirkan keindahan sejati, estetika abadi, dan ketenangan pikiran penuh di hari bahagia Anda.
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a
@@ -57,14 +45,6 @@ export default function Footer({ onOpenBooking }) {
                 className="w-9 h-9 rounded-full border border-luxury-gold/30 flex items-center justify-center text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300"
               >
                 <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href={brandConfig.socials.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full border border-luxury-gold/30 flex items-center justify-center text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300"
-              >
-                <Youtube className="w-4 h-4" />
               </a>
             </div>
           </div>
@@ -77,7 +57,7 @@ export default function Footer({ onOpenBooking }) {
             <ul className="space-y-2.5 text-xs sm:text-sm text-luxury-cream/80">
               <li>
                 <button onClick={() => scrollToSection('about')} className="hover:text-luxury-gold transition-colors">
-                  Profil & Visi Misi
+                  Profil &amp; Visi Misi
                 </button>
               </li>
               <li>
@@ -106,7 +86,7 @@ export default function Footer({ onOpenBooking }) {
           {/* Column 3: Contact & Hours */}
           <div>
             <h3 className="font-heading text-lg font-semibold text-luxury-gold mb-4 flex items-center gap-2">
-              <Phone className="w-4 h-4" /> Kontak & Lokasi
+              <Phone className="w-4 h-4" /> Kontak &amp; Lokasi
             </h3>
             <ul className="space-y-3 text-xs sm:text-sm text-luxury-cream/80">
               <li className="flex items-start gap-2.5">
@@ -118,51 +98,10 @@ export default function Footer({ onOpenBooking }) {
                 <span>{brandConfig.phone}</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-luxury-gold shrink-0" />
-                <span>{brandConfig.email}</span>
-              </li>
-              <li className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-luxury-gold shrink-0" />
                 <span>{brandConfig.operatingHours}</span>
               </li>
             </ul>
-          </div>
-
-          {/* Column 4: Newsletter */}
-          <div>
-            <h3 className="font-heading text-lg font-semibold text-luxury-gold mb-4">
-              Jurnal Pernikahan
-            </h3>
-            <p className="text-xs text-luxury-cream/70 leading-relaxed mb-4">
-              Dapatkan inspirasi tren pernikahan mewah, tips alokasi budget, & promo eksklusif setiap bulannya.
-            </p>
-            <form onSubmit={handleSubscribe} className="space-y-3">
-              <div className="relative">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Masukkan email Anda..."
-                  required
-                  className="w-full px-4 py-2.5 rounded-full bg-luxury-dark-soft border border-luxury-gold/30 text-white text-xs placeholder-luxury-cream/40 focus:outline-none focus:border-luxury-gold transition-colors"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-1 top-1 bottom-1 px-4 rounded-full bg-gold-gradient text-luxury-dark font-medium text-xs flex items-center justify-center hover:opacity-90 transition-opacity"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              {subscribed && (
-                <motion.p
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-xs text-green-400 font-medium flex items-center gap-1"
-                >
-                  <Sparkles className="w-3 h-3" /> Berhasil terdaftar! Terima kasih.
-                </motion.p>
-              )}
-            </form>
           </div>
 
         </div>
