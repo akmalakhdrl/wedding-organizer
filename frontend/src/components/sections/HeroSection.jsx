@@ -111,31 +111,21 @@ export default function HeroSection({ onOpenBooking, scrollToSection }) {
         src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-piano-112191.mp3"
       />
 
-      {/* ── Music Control Widget ────────────────────────────── */}
-      <div className="absolute top-28 right-6 z-30 flex items-center gap-2 bg-luxury-dark/70 backdrop-blur-md px-3.5 py-2 rounded-full border border-luxury-gold/30 shadow-gold-glow">
-        <button
-          onClick={toggleMusic}
-          className="flex items-center gap-2 text-xs text-luxury-cream hover:text-luxury-gold transition-colors focus:outline-none"
-          title={userPaused ? 'Nyalakan Musik' : 'Matikan Musik'}
-        >
-          <Music
-            className={`w-4 h-4 text-luxury-gold transition-all ${isPlaying ? 'animate-spin' : 'opacity-50'}`}
-            style={{ animationDuration: '4s' }}
-          />
-          <span className="font-medium hidden sm:inline text-[11px] uppercase tracking-wider">
-            {isPlaying ? 'Musik Aktif' : 'Putar Musik'}
-          </span>
-        </button>
-
-        {/* Volume button */}
-        <button
-          onClick={toggleMute}
-          className="p-1 text-luxury-gold hover:text-white transition-colors focus:outline-none border-l border-luxury-gold/20 pl-2"
-          title={isMuted ? 'Unmute' : 'Mute'}
-        >
-          {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-        </button>
-      </div>
+      {/* ── Single Music Control Button ────────────────────────────── */}
+      <button
+        onClick={toggleMusic}
+        className="absolute top-28 right-6 z-30 flex items-center gap-2 bg-luxury-dark/80 backdrop-blur-md px-4 py-2 rounded-full border border-luxury-gold/30 shadow-gold-glow hover:border-luxury-gold hover:scale-105 transition-all duration-300 focus:outline-none"
+        title={isPlaying ? 'Matikan Musik' : 'Nyalakan Musik'}
+      >
+        {isPlaying ? (
+          <Volume2 className="w-4 h-4 text-luxury-gold animate-pulse" />
+        ) : (
+          <VolumeX className="w-4 h-4 text-luxury-gold/60" />
+        )}
+        <span className="font-medium hidden sm:inline text-[11px] uppercase tracking-wider text-luxury-cream">
+          {isPlaying ? 'Musik Aktif' : 'Musik Mati'}
+        </span>
+      </button>
 
       {/* ── Background Slideshow ───────────────────────────── */}
       <AnimatePresence mode="wait">
