@@ -6,8 +6,8 @@ export const brandConfig = {
   whatsappMessage: "Halo Kresna Management, saya ingin berkonsultasi mengenai paket pernikahan.",
   email: "info@kresnamanagement.co.id",
   phone: "+62 888-0657-5707",
-  address: "Jl. Senopati No. 88, Kebayoran Baru, Jakarta Selatan 12190",
-  googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.275512879555!2d106.80556217499037!3d-6.227362993760773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f14d1a21e75d%3A0x6b107bfa443425b0!2sSenopati%2C%20Kebayoran%20Baru%2C%20South%20Jakarta%20City%2C%20Jakarta!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid",
+  address: "5RJ8+746, Pasuruhan Kidul I, Pasuruhan Kidul, Kec. Jati, Kabupaten Kudus, Jawa Tengah 59349",
+  googleMapsEmbed: "https://maps.google.com/maps?q=5RJ8%2B746+Pasuruhan+Kidul+Kudus+Jawa+Tengah&output=embed",
   operatingHours: "Senin - Minggu: 09.00 - 20.00 WIB",
   socials: {
     instagram: "https://instagram.com/aurawedding.id",
