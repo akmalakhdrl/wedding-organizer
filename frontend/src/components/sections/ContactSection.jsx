@@ -86,15 +86,6 @@ Mohon dapat dihubungi untuk konsultasi pernikahan. Terima kasih!`;
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-luxury-gold/10 border border-luxury-gold/30 text-luxury-gold shrink-0">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-luxury-gold font-semibold block">Surel Resmi:</span>
-                    <p className="text-luxury-cream/80 font-light mt-0.5">{brandConfig.email}</p>
-                  </div>
-                </div>
 
                 <div className="flex items-center gap-3">
                   <div className="p-2.5 rounded-xl bg-luxury-gold/10 border border-luxury-gold/30 text-luxury-gold shrink-0">
