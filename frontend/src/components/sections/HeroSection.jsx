@@ -7,6 +7,7 @@ export default function HeroSection({ isPreloading, onOpenBooking, scrollToSecti
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef(null);
+  const isHomeVisible = useRef(false);
 
   // Slide auto-advance
   useEffect(() => {
@@ -28,7 +29,13 @@ export default function HeroSection({ isPreloading, onOpenBooking, scrollToSecti
       // Fallback: unlock audio on first user interaction
       const unlock = () => {
         if (audioRef.current) {
+          // Play to ensure the browser unlocks this specific audio element
           audioRef.current.play().catch(() => {});
+          
+          // If Home is NOT visible, immediately pause it so no sound escapes
+          if (!isHomeVisible.current) {
+            audioRef.current.pause();
+          }
         }
         window.removeEventListener('click', unlock);
         window.removeEventListener('touchstart', unlock);
@@ -55,6 +62,7 @@ export default function HeroSection({ isPreloading, onOpenBooking, scrollToSecti
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        isHomeVisible.current = entry.isIntersecting;
         if (entry.isIntersecting) {
           playAudio();
         } else {
