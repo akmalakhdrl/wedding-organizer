@@ -127,48 +127,7 @@ export default function AboutSection() {
           ))}
         </div>
 
-        {/* Executive Team Showcase */}
-        <div className="pt-10 text-center space-y-10">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-luxury-gold">Dibalik Kesempurnaan</span>
-            <h3 className="font-heading text-2xl sm:text-4xl font-bold text-luxury-dark mt-1">
-              Tim Senior Wedding Specialist
-            </h3>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {aboutData.team.map((member, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.15 }}
-                className="group relative rounded-3xl overflow-hidden bg-white border border-luxury-cream-dark shadow-md hover:shadow-2xl transition-all duration-300 text-left"
-              >
-                <div className="h-80 overflow-hidden relative">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-luxury-dark via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-                  <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <span className="text-[11px] uppercase tracking-widest text-luxury-gold font-semibold">
-                      {member.experience}
-                    </span>
-                    <h4 className="font-heading text-xl font-bold gold-text-shimmer">
-                      {member.name}
-                    </h4>
-                    <p className="text-xs text-luxury-cream/80 font-light">
-                      {member.role}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
 
       </div>
     </section>
