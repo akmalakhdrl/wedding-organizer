@@ -24,7 +24,21 @@ export default function HeroSection({ isPreloading, onOpenBooking, scrollToSecti
     
     // Play immediately. If blocked by browser policy, it will throw NotAllowedError.
     audio.play().catch((err) => {
-      console.warn("Autoplay prevented by browser policy:", err);
+      console.warn("Autoplay prevented by browser policy, waiting for user interaction:", err);
+      // Fallback: unlock audio on first user interaction
+      const unlock = () => {
+        if (audioRef.current) {
+          audioRef.current.play().catch(() => {});
+        }
+        window.removeEventListener('click', unlock);
+        window.removeEventListener('touchstart', unlock);
+        window.removeEventListener('scroll', unlock);
+        window.removeEventListener('keydown', unlock);
+      };
+      window.addEventListener('click', unlock, { once: true });
+      window.addEventListener('touchstart', unlock, { once: true });
+      window.addEventListener('scroll', unlock, { once: true });
+      window.addEventListener('keydown', unlock, { once: true });
     });
   }, []);
 
