@@ -22,18 +22,19 @@ export default function Footer({ onOpenBooking }) {
           {/* Column 1: Brand Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border border-luxury-gold flex items-center justify-center bg-luxury-dark-soft shadow-gold-glow overflow-hidden">
+              {/* Wayang Icon */}
+              <div className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 shadow-gold-glow border border-luxury-gold/40">
                 <img
-                  src={brandConfig.logo || "/logo.png"}
-                  alt="Kresna Management Logo"
-                  className="w-full h-full object-cover rounded-full"
+                  src="/logo-icon.png"
+                  alt="Kresna Management Icon"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <div>
-                <span className="font-heading text-lg sm:text-xl font-bold tracking-wider gold-text-shimmer block">
+              <div className="leading-none">
+                <span className="font-heading text-lg sm:text-xl font-bold tracking-wider gold-text-shimmer block leading-tight">
                   KRESNA
                 </span>
-                <span className="text-[10px] tracking-[0.2em] uppercase font-light text-luxury-cream/70 block">
+                <span className="text-[10px] tracking-[0.2em] uppercase font-light text-luxury-cream/70 block mt-0.5">
                   Management
                 </span>
               </div>

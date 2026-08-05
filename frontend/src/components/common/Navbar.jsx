@@ -77,18 +77,20 @@ export default function Navbar({ onOpenBooking, wishlistCount, onOpenWishlist })
             onClick={() => scrollToSection('home')}
             className="flex items-center gap-3 group text-left focus:outline-none"
           >
-            <div className="w-10 h-10 rounded-full border border-luxury-gold/60 flex items-center justify-center bg-luxury-dark/40 group-hover:scale-105 transition-transform duration-300 shadow-gold-glow overflow-hidden">
+            {/* Wayang Icon Circle */}
+            <div className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-gold-glow">
               <img
-                src={brandConfig.logo || "/logo.png"}
-                alt="Kresna Management Logo"
-                className="w-full h-full object-cover rounded-full"
+                src="/logo-icon.png"
+                alt="Kresna Management Icon"
+                className="w-full h-full object-cover"
               />
             </div>
-            <div>
+            {/* Brand Text */}
+            <div className="leading-none">
               <span className="font-heading text-lg sm:text-xl font-bold tracking-wider gold-text-shimmer block leading-tight">
                 KRESNA
               </span>
-              <span className="text-[10px] tracking-[0.2em] uppercase font-light text-luxury-cream/80 block">
+              <span className="text-[10px] tracking-[0.2em] uppercase font-light text-luxury-cream/80 block mt-0.5">
                 Management
               </span>
             </div>
