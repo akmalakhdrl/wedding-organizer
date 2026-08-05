@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Calendar, Heart } from 'lucide-react';
+import { Sparkles, ChevronLeft, ChevronRight, Calendar, Heart } from 'lucide-react';
 import { heroSlides } from '../../data/weddingData';
 
 export default function HeroSection({ onOpenBooking, scrollToSection }) {
@@ -85,28 +85,6 @@ export default function HeroSection({ onOpenBooking, scrollToSection }) {
             {slide.subtitle}
           </motion.p>
 
-          {/* Action CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="pt-4 flex flex-wrap items-center gap-4"
-          >
-            <button
-              onClick={() => onOpenBooking()}
-              className="px-8 py-4 rounded-full bg-gold-gradient text-luxury-dark font-bold text-xs sm:text-sm tracking-wider uppercase shadow-gold-glow hover:shadow-luxury-hover hover:scale-105 transition-all duration-300 flex items-center gap-3"
-            >
-              <span>{slide.ctaPrimary}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={() => scrollToSection('packages')}
-              className="px-8 py-4 rounded-full border border-luxury-gold/50 bg-luxury-dark/40 hover:bg-luxury-gold/20 text-white font-semibold text-xs sm:text-sm tracking-wider uppercase backdrop-blur-md hover:border-luxury-gold transition-all duration-300"
-            >
-              {slide.ctaSecondary}
-            </button>
-          </motion.div>
 
         </div>
       </div>
