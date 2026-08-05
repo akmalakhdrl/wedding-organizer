@@ -36,43 +36,59 @@ export default function App() {
 
   useEffect(() => { musicEnabledRef.current = musicEnabled; }, [musicEnabled]);
 
-  // Start music immediately when preloader finishes
+  // Start muted autoplay on mount (browsers always permit muted autoplay)
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = 0.5;
+    audio.muted = true;
+    audio.play()
+      .then(() => {
+        setMusicPlaying(true);
+      })
+      .catch(() => {});
+  }, []);
+
+  // When preloader finishes, unmute audio and ensure play
   const handlePreloaderFinish = useCallback(() => {
     setIsPreloading(false);
 
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || !musicEnabledRef.current) return;
+
+    audio.muted = false;
     audio.volume = 0.5;
     audio.play()
       .then(() => setMusicPlaying(true))
       .catch((err) => {
-        console.log('Autoplay deferred for user gesture:', err);
+        console.log('Unmute on preloader finish:', err);
       });
   }, []);
 
-  // Unlock audio autoplay on any user gesture anywhere (pointerdown, mousemove, scroll, touchstart)
+  // User gesture listener: unmute & play on any click/tap/pointerdown
   useEffect(() => {
     const handleGesture = () => {
       const audio = audioRef.current;
-      if (audio && musicEnabledRef.current && audio.paused) {
-        audio.play()
-          .then(() => setMusicPlaying(true))
-          .catch(() => {});
+      if (!audio || !musicEnabledRef.current) return;
+      audio.muted = false;
+      audio.volume = 0.5;
+      if (audio.paused) {
+        audio.play().then(() => setMusicPlaying(true)).catch(() => {});
+      } else {
+        setMusicPlaying(true);
       }
     };
 
     window.addEventListener('click', handleGesture);
-    window.addEventListener('pointerdown', handleGesture);
     window.addEventListener('touchstart', handleGesture, { passive: true });
-    window.addEventListener('scroll', handleGesture, { passive: true });
-    window.addEventListener('mousemove', handleGesture, { passive: true });
+    window.addEventListener('pointerdown', handleGesture, { passive: true });
+    window.addEventListener('keydown', handleGesture);
 
     return () => {
       window.removeEventListener('click', handleGesture);
-      window.removeEventListener('pointerdown', handleGesture);
       window.removeEventListener('touchstart', handleGesture);
-      window.removeEventListener('scroll', handleGesture);
-      window.removeEventListener('mousemove', handleGesture);
+      window.removeEventListener('pointerdown', handleGesture);
+      window.removeEventListener('keydown', handleGesture);
     };
   }, []);
 
@@ -108,6 +124,8 @@ export default function App() {
       // Turn ON — direct user click, so browser allows play()
       setMusicEnabled(true);
       musicEnabledRef.current = true;
+      audio.muted = false;
+      audio.volume = 0.5;
       audio.play().then(() => setMusicPlaying(true)).catch(() => {});
     }
   }, [musicEnabled]);
