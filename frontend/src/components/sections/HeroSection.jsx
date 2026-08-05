@@ -1,21 +1,18 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, ChevronLeft, ChevronRight, Volume2, VolumeX, Music } from 'lucide-react';
 import { heroSlides } from '../../data/weddingData';
 
-export default function HeroSection({ onOpenBooking, scrollToSection }) {
+export default function HeroSection({
+  onOpenBooking,
+  scrollToSection,
+  musicPlaying,
+  musicMuted,
+  musicEnabled,
+  onToggleMusic,
+  onToggleMute
+}) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPlaying, setIsPlaying]     = useState(false);
-  const [isMuted,   setIsMuted]       = useState(false);
-  const [userOff,   setUserOff]       = useState(false); // true = user explicitly turned off
-
-  const audioRef        = useRef(null);
-  const isHomeVisible   = useRef(true);   // track visibility without re-render
-  const audioUnlocked   = useRef(false);  // browser autoplay unlocked?
-  const userOffRef      = useRef(false);  // mirror of userOff for use in callbacks
-
-  // Keep ref in sync with state
-  useEffect(() => { userOffRef.current = userOff; }, [userOff]);
 
   // ── Slide auto-advance ────────────────────────────────────────────────────
   useEffect(() => {
@@ -25,129 +22,35 @@ export default function HeroSection({ onOpenBooking, scrollToSection }) {
     return () => clearInterval(timer);
   }, []);
 
-  // ── Helper: safely play ───────────────────────────────────────────────────
-  const tryPlay = useCallback(() => {
-    const audio = audioRef.current;
-    if (!audio || userOffRef.current) return;
-    audio.play()
-      .then(() => { setIsPlaying(true); audioUnlocked.current = true; })
-      .catch(() => {});
-  }, []);
-
-  // ── Helper: safely pause ──────────────────────────────────────────────────
-  const doPause = useCallback(() => {
-    audioRef.current?.pause();
-    setIsPlaying(false);
-  }, []);
-
-  // ── IntersectionObserver: pause when leaving Home, resume when back ────────
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      isHomeVisible.current = entry.isIntersecting;
-      if (entry.isIntersecting) {
-        // Resume only if audio was already unlocked and user didn't turn it off
-        if (audioUnlocked.current && !userOffRef.current) tryPlay();
-      } else {
-        doPause();
-      }
-    }, { threshold: 0.2 });
-
-    const el = document.getElementById('home');
-    if (el) observer.observe(el);
-    return () => { if (el) observer.unobserve(el); };
-  }, [tryPlay, doPause]);
-
-  // ── Auto-start on first user interaction (unlock browser autoplay) ─────────
-  useEffect(() => {
-    const unlock = (e) => {
-      // Already unlocked or user turned off → skip
-      if (audioUnlocked.current || userOffRef.current) {
-        cleanup();
-        return;
-      }
-      // Only auto-start if Home section is visible
-      if (!isHomeVisible.current) { cleanup(); return; }
-
-      tryPlay();
-      cleanup();
-    };
-
-    const cleanup = () => {
-      window.removeEventListener('click',      unlock);
-      window.removeEventListener('keydown',    unlock);
-      window.removeEventListener('touchstart', unlock);
-      window.removeEventListener('scroll',     unlock);
-    };
-
-    window.addEventListener('click',      unlock, { once: true });
-    window.addEventListener('keydown',    unlock, { once: true });
-    window.addEventListener('touchstart', unlock, { once: true, passive: true });
-    window.addEventListener('scroll',     unlock, { once: true, passive: true });
-
-    return cleanup;
-  }, [tryPlay]);
-
-  // ── User toggle: music button ─────────────────────────────────────────────
-  const handleToggleMusic = useCallback(() => {
-    const turningOff = !userOff; // we're toggling, so if currently on → turn off
-    setUserOff((prev) => !prev);
-
-    if (turningOff) {
-      // Turning off → pause permanently until user enables again
-      doPause();
-      audioUnlocked.current = false; // need re-unlock if turned back on
-    } else {
-      // Turning on → try to play (this IS a direct user click, so autoplay allowed)
-      userOffRef.current = false; // update ref before tryPlay
-      if (isHomeVisible.current) tryPlay();
-    }
-  }, [userOff, tryPlay, doPause]);
-
-  // ── Mute toggle ───────────────────────────────────────────────────────────
-  const handleToggleMute = useCallback(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    audio.muted = !isMuted;
-    setIsMuted((prev) => !prev);
-  }, [isMuted]);
-
   const slide = heroSlides[currentSlide];
 
   return (
     <section id="home" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-luxury-dark text-white select-none">
 
-      {/* ── Audio ──────────────────────────────────────────── */}
-      <audio
-        ref={audioRef}
-        loop
-        preload="auto"
-        src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-piano-112191.mp3"
-      />
-
       {/* ── Music Control Widget ────────────────────────────── */}
       <div className="absolute top-28 right-6 z-30 flex items-center gap-2 bg-luxury-dark/70 backdrop-blur-md px-3.5 py-2 rounded-full border border-luxury-gold/30 shadow-gold-glow">
         <button
-          onClick={handleToggleMusic}
+          onClick={onToggleMusic}
           className="flex items-center gap-2 text-xs text-luxury-cream hover:text-luxury-gold transition-colors focus:outline-none"
-          title={userOff ? 'Nyalakan Musik' : 'Matikan Musik'}
+          title={musicEnabled ? 'Matikan Musik' : 'Nyalakan Musik'}
         >
           <Music
-            className={`w-4 h-4 text-luxury-gold transition-all ${isPlaying ? 'animate-spin' : 'opacity-50'}`}
+            className={`w-4 h-4 text-luxury-gold transition-all ${musicPlaying ? 'animate-spin' : 'opacity-50'}`}
             style={{ animationDuration: '4s' }}
           />
           <span className="font-medium hidden sm:inline text-[11px] uppercase tracking-wider">
-            {isPlaying ? 'Musik Aktif' : userOff ? 'Musik Mati' : 'Memuat...'}
+            {musicPlaying ? 'Musik Aktif' : !musicEnabled ? 'Musik Mati' : 'Memuat...'}
           </span>
         </button>
 
-        {/* Volume — only when music is on */}
-        {!userOff && (
+        {/* Volume — only when music is enabled */}
+        {musicEnabled && (
           <button
-            onClick={handleToggleMute}
+            onClick={onToggleMute}
             className="p-1 text-luxury-gold hover:text-white transition-colors focus:outline-none border-l border-luxury-gold/20 pl-2"
-            title={isMuted ? 'Unmute' : 'Mute'}
+            title={musicMuted ? 'Unmute' : 'Mute'}
           >
-            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+            {musicMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
           </button>
         )}
       </div>
